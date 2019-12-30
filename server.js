@@ -2,9 +2,10 @@ const server = require('express')()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const port = 5000
-
+const cors = require('cors')
 const mongooseurl = 'mongodb://127.0.0.1/dblatihan'
 
+server.use(cors())
 mongoose.connect(mongooseurl, {
     useCreateIndex: true,
     useNewUrlParser: true,
@@ -23,11 +24,8 @@ server.use(bodyParser.urlencoded({
     limit: '50mb'
 }))
 
-const mhs = require('./router/mahasiswa')
-const mk = require('./router/matakuliah')
-
-server.use('/mahasiswa', mhs)
-server.use('/matakuliah', mk)
+server.use('/mahasiswa', require('./router/mahasiswa'))
+server.use('/matakuliah', require('./router/matkulrouts'))
 
 
 server.listen(port, function () {

@@ -4,7 +4,10 @@ const schema = mongoose.Schema
 
 const mahasiswaSchema = new schema({
   npm: {
-    type: String
+    type: String,
+    index: {
+      unique: true
+    }
   },
   nama: {
     type: String
